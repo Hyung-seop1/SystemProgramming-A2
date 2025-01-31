@@ -3,5 +3,9 @@
 
 
 #include <stdio.h>
+#include <string.h>
+
+// Function Prototypes
+
 
 #endif // ENCODER_H
