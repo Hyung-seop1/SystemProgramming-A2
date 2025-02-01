@@ -37,8 +37,6 @@ int main(int argc, char* argv[]) {
         // If no ouput file is provided add extenstion 
         addExtension(inputFilename, &outputFilename, srec_format);
 
-
-
         // Perform conversion based on the selected format
         if (srec_format) {
             testingSRC(inputFilename, outputFilename); // S-Record format conversion

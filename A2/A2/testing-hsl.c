@@ -1,6 +1,6 @@
 ﻿#include "encoder.h"
 
-void testingSRC(char* input, char* output) {
+void testingSRC(char* input, char* output) { //-------------Navtej--------------
 	printf("SRC: %s \n%s", input, output);
 }
 
@@ -55,6 +55,9 @@ void addExtension(char* inputFilename, char** outputFilename, int srec_format) {
 }
 
 void stdIn(char* fileName) {
+
+    //--------implemnt convert asm file inside this function ----------------
+
     FILE* file = fopen(fileName, "w");  // open output file
     if (file == NULL) {
         perror("Error opening output file");
