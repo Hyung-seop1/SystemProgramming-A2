@@ -31,13 +31,19 @@ int main(int argc, char* argv[]) {
         }
     }
 
+    // If no ouput file is provided add extenstion 
+    addExtension(inputFilename, &outputFilename, srec_format);
+
+    // Perform conversion based on the selected format
     if (srec_format) {
-        testingSRC(inputFilename, outputFilename);
+        testingSRC(inputFilename, outputFilename); // S-Record format conversion
     }
     else {
-        testingASM(inputFilename, outputFilename);
+        if (inputFilename == NULL && outputFilename == NULL) {
+            // add function here for converting ASM
+        }
+        testingASM(inputFilename, outputFilename); // ASM format conversion
     }
-    
 
     return 0;
 }

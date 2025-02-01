@@ -10,5 +10,6 @@
 // Function Prototypes
 void testingSRC(char* input, char* output);
 void testingASM(char* input, char* output);
+void addExtension(char* inputFilename, char** outputFilename, int srec_format);
 
 #endif // ENCODER_H
