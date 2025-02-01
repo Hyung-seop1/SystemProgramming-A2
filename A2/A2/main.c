@@ -4,6 +4,7 @@ int main(int argc, char* argv[]) {
     char* inputFilename = NULL;
     char* outputFilename = NULL;
     int srec_format = 0; // Flag for S-Record format
+    int noArgument = 0;
 
     // Parse command-line arguments
     for (int i = 1; i < argc; i++) {
@@ -21,29 +22,32 @@ int main(int argc, char* argv[]) {
         else if (strncmp(argv[i], "-srec", 5) == 0) {
             srec_format = 1;  // Set SREC format flag
         }
-        else if (argc == 1) {
-            // If there is no argument
-            // Default format(ASM), no action needed
-        }
         else {
             printf("Usage: encodeInput -iInputFile -oOutputFile -srec -h\n");
             return 1;
         }
     }
 
-    // If no ouput file is provided add extenstion 
-    addExtension(inputFilename, &outputFilename, srec_format);
 
-    // Perform conversion based on the selected format
-    if (srec_format) {
-        testingSRC(inputFilename, outputFilename); // S-Record format conversion
+    // If no arguments are provided, call stdOut function
+    if (argc == 1) {  // No command-line arguments except the program name
+        stdOut();
     }
     else {
-        if (inputFilename == NULL && outputFilename == NULL) {
-            // add function here for converting ASM
-        }
-        testingASM(inputFilename, outputFilename); // ASM format conversion
-    }
+        // If no ouput file is provided add extenstion 
+        addExtension(inputFilename, &outputFilename, srec_format);
 
+
+
+        // Perform conversion based on the selected format
+        if (srec_format) {
+            testingSRC(inputFilename, outputFilename); // S-Record format conversion
+        }
+        else {
+            testingASM(inputFilename, outputFilename); // ASM format conversion
+        }
+
+    }
+    
     return 0;
 }

@@ -10,37 +10,7 @@ void testingASM(char* input, char* output) {
 
     // if "-i" is not provided...
     if (input == NULL) {
-        FILE* file = fopen(output, "w");  // open output file
-        if (file == NULL) {
-            perror("Error opening output file");
-            exit(1);
-        }
-
-        printf("Please enter the content after you type (press Ctrl+Z to end):\n"); // CTRL+Z IN WINDOWS, CTRL+D IN LINUX, just for testing
-
-        char buffer[1024];  
-        while (fgets(buffer, sizeof(buffer), stdin) != NULL) {
-            fprintf(file, "%s", buffer); 
-        }
-
-        fclose(file);
-    }
-
-    if (input == NULL && output == NULL) {
-        FILE* file = fopen(output, "w");  // open output file
-        if (file == NULL) {
-            perror("Error opening output file");
-            exit(1);
-        }
-
-        printf("Please enter the content after you type (press Ctrl+Z to end):\n"); // CTRL+Z IN WINDOWS, CTRL+D IN LINUX, just for testing
-
-        char buffer[1024];
-        while (fgets(buffer, sizeof(buffer), stdin) != NULL) {
-            fprintf(file, "%s", buffer);
-        }
-
-        fclose(file);
+        stdIn(output);
     }
 }
 /*
@@ -81,5 +51,32 @@ void addExtension(char* inputFilename, char** outputFilename, int srec_format) {
             printf("Error: No input file specified, and no output file provided.\n");
             exit(1);
         }
+    }
+}
+
+void stdIn(char* fileName) {
+    FILE* file = fopen(fileName, "w");  // open output file
+    if (file == NULL) {
+        perror("Error opening output file");
+        exit(1);
+    }
+
+    printf("Please enter the content after you type (press Ctrl+Z to end):\n"); // CTRL+Z IN WINDOWS, CTRL+D IN LINUX, just for testing
+
+    char buffer[1024];
+    while (fgets(buffer, sizeof(buffer), stdin) != NULL) {
+        fprintf(file, "%s", buffer);
+    }
+
+    fclose(file);
+}
+
+void stdOut(void) {
+    printf("Please enter the content after you type (press Ctrl+Z to end):\n"); // CTRL+Z IN WINDOWS, CTRL+D IN LINUX, just for testing
+
+    char buffer[1024];
+    while (fgets(buffer, sizeof(buffer), stdin) != NULL) {
+        // Print to standard output (stdout)
+        printf("%s", buffer);
     }
 }

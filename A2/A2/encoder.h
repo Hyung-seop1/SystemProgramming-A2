@@ -11,5 +11,7 @@
 void testingSRC(char* input, char* output);
 void testingASM(char* input, char* output);
 void addExtension(char* inputFilename, char** outputFilename, int srec_format);
+void stdIn(char* fileName);
+void stdOut(void);
 
 #endif // ENCODER_H
