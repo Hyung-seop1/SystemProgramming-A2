@@ -130,6 +130,7 @@
     <ClCompile Include="asm.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="srec.c" />
+    <ClCompile Include="testing-hsl.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="encoder.h" />

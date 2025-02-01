@@ -8,6 +8,7 @@
 #pragma warning(disable:4996)
 
 // Function Prototypes
-void srecFunction(char* fileName); // just for testing
+void testingSRC(char* input, char* output);
+void testingASM(char* input, char* output);
 
 #endif // ENCODER_H

@@ -1,6 +1,6 @@
 #include "encoder.h"
 
-void convertToASM(char* filename, FILE* outputFile)
+/*void convertToASM(char* filename, FILE* outputFile)
 {
 	FILE* fp =stdin
 		if (filename)
@@ -27,4 +27,4 @@ void convertToASM(char* filename, FILE* outputFile)
 		fclose(fp);
 	}
 	
-}
+}*/
