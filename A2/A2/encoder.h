@@ -8,6 +8,6 @@
 #pragma warning(disable:4996)
 
 // Function Prototypes
-
+void srecFunction(char* fileName); // just for testing
 
 #endif // ENCODER_H
