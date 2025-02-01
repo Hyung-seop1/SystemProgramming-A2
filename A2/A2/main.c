@@ -15,15 +15,17 @@ int main(int argc, char* argv[]) {
         else if (strncmp(argv[i], "-i", 2) == 0) {
             // Extract input filename
             inputFilename = argv[i] + 2;  // Skip the "-i" part
-            srecFunction(inputFilename);  // Check and process the input file
         }
         else if (strncmp(argv[i], "-o", 2) == 0) {
             outputFilename = argv[i] + 2; // Skip the "-o" part and get the filename
+            // Need function for convert data into .asm file
         }
         else if (strncmp(argv[i], "-srec", 5) == 0) {
             srec_format = 1;  // Set SREC format flag
+            inputFilename = argv[i + 1] + 2; // Get input file name next "-srec"
         }
-        else if (strncmp(argv[i], "-asm", 4) == 0) {
+        else if (argc == 1) {
+            // If there is no argument
             // Default format, no action needed
         }
         else {
