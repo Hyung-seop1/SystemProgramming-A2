@@ -7,9 +7,8 @@ void testingSRC(char* input, char* output) { //-------------Navtej--------------
 void testingASM(char* input, char* output) {
 
     printf("ASM: %s | %s\n", input, output);
-    FILE* fp = fopen(input, "rb");
     // if "-i" is not provided...
-    if (fp == NULL) {
+    if (input == NULL) {
         stdIn(output);
     }
 }
