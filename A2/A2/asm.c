@@ -42,7 +42,7 @@ void convertToASM(char* filename, char* outputFile)
 void stdOut(void) {
 	printf("Please enter the content after you type (press Ctrl+Z to end):\n"); // CTRL+Z IN WINDOWS, CTRL+D IN LINUX, just for testing
 	FILE* output = stdout;
-	char buffer[1024];
+	unsigned char buffer[1024];
 	int bytes_read = 0;
 	while ((bytes_read = fread(buffer, 1, sizeof(buffer), stdin)) > 0)
 	{
