@@ -7,7 +7,6 @@ void testingSRC(char* input, char* output) { //-------------Navtej--------------
 void testingASM(char* input, char* output) {
 
     printf("ASM: %s | %s\n", input, output);
-
     // if "-i" is not provided...
     if (input == NULL) {
         stdIn(output);
@@ -67,10 +66,25 @@ void stdIn(char* fileName) {
     printf("Please enter the content after you type (press Ctrl+Z to end):\n"); // CTRL+Z IN WINDOWS, CTRL+D IN LINUX, just for testing
 
     char buffer[1024];
-    while (fgets(buffer, sizeof(buffer), stdin) != NULL) {
-        fprintf(file, "%s", buffer);
+    //while (fgets(buffer, sizeof(buffer), stdin) != NULL) {   //change this to freads to limit the input precisely
+    //    fprintf(file, "dc.b\t");
+    //    for (int i = 0; i < sizeof(buffer); i += 16)
+    //    {
+    //        //if(buffer>)   Limit the input to be 16 bytes at a time
+    //        fprintf(file, "$%02X", buffer[i]);  //Write the hex format into the file
+    //    }
+    //}
+    int bytes_read;
+    int remaining_bytes;
+    while (bytes_read = fread(buffer,1, sizeof(buffer), stdin))
+    {
+        for (int i = 0; i < bytes_read; i += 16)
+                {
+            remaining_bytes = bytes_read - i;
+            if(remaining_bytes>16)
+                    fprintf(file, "$%02X", buffer[i]);  //Write the hex format into the file
+                }
     }
-
     fclose(file);
 }
 
