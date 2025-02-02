@@ -7,9 +7,9 @@ void testingSRC(char* input, char* output) { //-------------Navtej--------------
 void testingASM(char* input, char* output) {
 
     printf("ASM: %s | %s\n", input, output);
-
+    FILE* fp = fopen(input, "rb");
     // if "-i" is not provided...
-    if (input == NULL) {
+    if (fp == NULL) {
         stdIn(output);
     }
 }
@@ -68,7 +68,7 @@ void stdIn(char* fileName) {
 
     char buffer[1024];
     while (fgets(buffer, sizeof(buffer), stdin) != NULL) {
-        fprintf(file, "%s", buffer);
+        fprintf(file, "dc.b\t");
     }
 
     fclose(file);
