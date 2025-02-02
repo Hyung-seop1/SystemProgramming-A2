@@ -37,14 +37,14 @@ void addExtension(char* inputFilename, char** outputFilename, int srec_format) {
             * NEED TO IMPLEMENT HERE FOR CONVERTING ASM | SREC
             */
 
-            // Creating file that extension changed
-            FILE* file = fopen(*outputFilename, "w");
-            if (file == NULL) {
-                perror("Error opening output file");
-                exit(1);
-            }
-            printf("%s file created\n", *outputFilename);
-            fclose(file);
+            //// Creating file that extension changed
+            //FILE* file = fopen(*outputFilename, "w");
+            //if (file == NULL) {
+            //    perror("Error opening output file");
+            //    exit(1);
+            //}
+            //printf("%s file created\n", *outputFilename);
+            //fclose(file);
 
         }
         else {

@@ -39,7 +39,14 @@ int main(int argc, char* argv[]) {
 
         // Perform conversion based on the selected format
         if (srec_format) {
-            testingSRC(inputFilename, outputFilename); // S-Record format conversion
+            if (inputFilename) {
+                write_srec(inputFilename, outputFilename); // Convert to S-Record
+                printf("S-Record file generated: %s\n", outputFilename);
+            }
+            else {
+                printf("Error: No input file provided for S-Record conversion.\n");
+                return 1;
+            }
         }
         else {
             testingASM(inputFilename, outputFilename); // ASM format conversion
