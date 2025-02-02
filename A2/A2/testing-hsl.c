@@ -66,8 +66,13 @@ void stdIn(char* fileName) {
     printf("Please enter the content after you type (press Ctrl+Z to end):\n"); // CTRL+Z IN WINDOWS, CTRL+D IN LINUX, just for testing
 
     char buffer[1024];
-    while (fgets(buffer, sizeof(buffer), stdin) != NULL) {
+    while (fgets(buffer, sizeof(buffer), stdin) != NULL) {   //change this to freads to limit the input precisely
         fprintf(file, "dc.b\t");
+        for (int i = 0; i < sizeof(buffer); i += 16)
+        {
+            //if(buffer>)   Limit the input to be 16 bytes at a time
+            fprintf(file, "$%02X", buffer[i]);  //Write the hex format into the file
+        }
     }
 
     fclose(file);
