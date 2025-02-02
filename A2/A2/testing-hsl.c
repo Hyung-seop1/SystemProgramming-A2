@@ -89,12 +89,3 @@ void stdIn(char* fileName) {
     fclose(file);
 }
 
-void stdOut(void) {
-    printf("Please enter the content after you type (press Ctrl+Z to end):\n"); // CTRL+Z IN WINDOWS, CTRL+D IN LINUX, just for testing
-
-    char buffer[1024];
-    while (fgets(buffer, sizeof(buffer), stdin) != NULL) {
-        // Print to standard output (stdout)
-        printf("%s", buffer);
-    }
-}

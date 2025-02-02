@@ -16,5 +16,6 @@ void addExtension(char* inputFilename, char** outputFilename, int srec_format);
 void stdIn(char* fileName);
 void stdOut(void);
 void convertToASM(char* filename, char* outputFile);
+void generateASM(char* buffer, char* output, int bytes_read);
 
 #endif // ENCODER_H
