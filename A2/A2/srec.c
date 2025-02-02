@@ -17,18 +17,27 @@ unsigned char calculate_checksum(unsigned char count, unsigned short address, un
 
 
 void write_srec(const char* inputFilename, const char* outputFilename) {
-    FILE* inputFile = fopen(inputFilename, "rb");
-    if (!inputFile) {
-        perror("Error opening input file");
-        exit(EXIT_FAILURE);
+    FILE* inputFile = stdin;  // Default to stdin if no input file is specified
+    FILE* outputFile = stdout; // Output directly to console if no file
+
+    if (inputFilename && (strcmp(inputFilename, "-") != 0)) {
+        inputFile = fopen(inputFilename, "rb");
+        if (!inputFile) {
+            perror("Error opening input file");
+            exit(EXIT_FAILURE);
+        }
     }
 
-    FILE* outputFile = fopen(outputFilename, "w");
-    if (!outputFile) {
-        perror("Error opening output file");
-        fclose(inputFile);
-        exit(EXIT_FAILURE);
+    if (outputFilename) {
+        outputFile = fopen(outputFilename, "w");
+        if (!outputFile) {
+            perror("Error opening output file");
+            if (inputFile != stdin) fclose(inputFile);
+            exit(EXIT_FAILURE);
+        }
     }
+
+    fflush(stdin);
 
     // Write S0 header record
     unsigned char headerData[16] = { 0 };
@@ -43,7 +52,8 @@ void write_srec(const char* inputFilename, const char* outputFilename) {
     // Write S1 records
     unsigned char dataBuffer[MAX_DATA_BYTES];
     unsigned short address = 0;
-    int bytesRead, s1Count = 0;
+    int bytesRead = 0;
+    int s1Count = 0;
 
     while ((bytesRead = fread(dataBuffer, 1, MAX_DATA_BYTES, inputFile)) > 0) {
         unsigned char s1_checksum = calculate_checksum(3 + bytesRead, address, dataBuffer, bytesRead);
@@ -64,6 +74,6 @@ void write_srec(const char* inputFilename, const char* outputFilename) {
     unsigned char s9_checksum = calculate_checksum(3, 0x0000, NULL, 0);
     fprintf(outputFile, "S9030000%02X\n", s9_checksum);
 
-    fclose(inputFile);
-    fclose(outputFile);
+    if (inputFile != stdin) fclose(inputFile);
+    if (outputFile != stdout) fclose(outputFile);
 }

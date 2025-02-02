@@ -35,19 +35,27 @@ int main(int argc, char* argv[]) {
     }
     else {
         // If no ouput file is provided add extenstion 
-        addExtension(inputFilename, &outputFilename, srec_format);
+        //addExtension(inputFilename, &outputFilename, srec_format);
 
         // Perform conversion based on the selected format
         if (srec_format) {
             if (inputFilename) {
-                write_srec(inputFilename, outputFilename); // Convert to S-Record
-                printf("S-Record file generated: %s\n", outputFilename);
+                // Automatically set output file to "<input>.srec" if not given
+                if (!outputFilename) {
+                    size_t len = strlen(inputFilename);
+                    outputFilename = (char*)malloc(len + 6);
+                    strcpy(outputFilename, inputFilename);
+                    strcat(outputFilename, ".srec");
+                }
+                write_srec(inputFilename, outputFilename);
+                //printf("S-Record file generated: %s\n", outputFilename);
             }
             else {
-                printf("Error: No input file provided for S-Record conversion.\n");
-                return 1;
+                printf("Please enter the content after you type (press Ctrl+Z to end):\n");
+                write_srec(NULL, NULL);  // Process stdin and display output
             }
         }
+
         else {
             convertToASM(inputFilename, outputFilename); // ASM format conversion
         }
