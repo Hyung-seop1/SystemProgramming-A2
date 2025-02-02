@@ -74,6 +74,6 @@ void generateASM(char* buffer, char* output, int bytes_read)
 				fprintf(output, ", ");
 			}
 		}
-		fprintf(output, "\n");
+		//fprintf(output, "\n");
 	}
 }
