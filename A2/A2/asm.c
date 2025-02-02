@@ -16,7 +16,7 @@ void convertToASM(char* filename, char* outputFile)
 	    }
 		if (outputFile == NULL)
 		{
-			stdOut(filename);
+			stdOut();
 		}
 		FILE* output = fopen(outputFile, "w");
 		if (output == NULL)
