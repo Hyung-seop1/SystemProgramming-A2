@@ -49,7 +49,7 @@ int main(int argc, char* argv[]) {
             }
         }
         else {
-            testingASM(inputFilename, outputFilename); // ASM format conversion
+            convertToASM(inputFilename, outputFilename); // ASM format conversion
         }
 
     }

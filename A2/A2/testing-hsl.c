@@ -1,4 +1,5 @@
 ﻿#include "encoder.h"
+#define MAX_DATA_BYTES 16
 
 void testingSRC(char* input, char* output) { //-------------Navtej--------------
 	printf("SRC: %s \n%s", input, output);
@@ -76,14 +77,14 @@ void stdIn(char* fileName) {
     //}
     int bytes_read;
     int remaining_bytes;
-    while (bytes_read = fread(buffer,1, sizeof(buffer), stdin))
+    while ((bytes_read = fread(buffer,1, sizeof(buffer), stdin))>0)
     {
         for (int i = 0; i < bytes_read; i += 16)
-                {
+        {
             remaining_bytes = bytes_read - i;
             if(remaining_bytes>16)
                     fprintf(file, "$%02X", buffer[i]);  //Write the hex format into the file
-                }
+        }
     }
     fclose(file);
 }
