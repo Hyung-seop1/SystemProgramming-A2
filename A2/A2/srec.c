@@ -1,11 +1,30 @@
+/*
+ * FILE          : srec.c
+ * PROJECT       : SENG2030 - SYSTEM PROGRAMMING
+ * PROGRAMMER    : Hyungseop Lee (8948291) | Navtej Saini (8958194) | Elibe Deborah (8910192)
+ * FIRST VERSION : 2025-02-02
+ * DESCRIPTION   :
+ *     This program converts a binary file into the Motorola S-Record (.srec) format.
+ *     It processes the input file and generates the appropriate S-Record format,
+ *     including S0 (header), S1 (data), S5 (count), and S9 (end) records.
+ */
+
 #include "encoder.h"
 
 #define HEADER_NAME "NAV-DEB-HSL"  // Group name for the S0 header
 #define MAX_DATA_BYTES 16          // Max bytes per S1 record
 
-
-
-// Function to calculate checksum
+ /*
+  * FUNCTION   : calculate_checksum
+  * DESCRIPTION: This function calculates the checksum for an S-Record line by summing
+  *              all the bytes in the record and taking the one's complement.
+  * PARAMETERS :
+  *   - count    : The total byte count of the record, including address and data.
+  *   - address  : The memory address associated with the record.
+  *   - data     : The pointer to the data bytes in the record.
+  *   - data_len : The number of data bytes in the record.
+  * RETURNS    : The computed one’s complement checksum as an unsigned char.
+  */
 unsigned char calculate_checksum(unsigned char count, unsigned short address, unsigned char* data, int data_len) {
     unsigned int sum = count + (address >> 8) + (address & 0xFF);
     for (int i = 0; i < data_len; i++) {
@@ -14,8 +33,17 @@ unsigned char calculate_checksum(unsigned char count, unsigned short address, un
     return ~sum;  // One's complement
 }
 
-
-
+/*
+ * FUNCTION   : write_srec
+ * DESCRIPTION: This function reads a binary input file and writes its contents in
+ *              Motorola S-Record format to the specified output file.
+ *              It includes S0 (header), S1 (data), S5 (record count), and S9 (EOF) records.
+ * PARAMETERS :
+ *   - inputFilename  : The name of the binary input file.
+ *   - outputFilename : The name of the output S-Record (.srec) file.
+ * RETURNS    : VOID
+ *              Outputs the formatted S-Record data to the specified output file.
+ */
 void write_srec(const char* inputFilename, const char* outputFilename) {
     FILE* inputFile = stdin;  // Default to stdin if no input file is specified
     FILE* outputFile = stdout; // Output directly to console if no file
